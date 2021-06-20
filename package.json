@@ -1,5 +1,5 @@
 {
-  "name": "uuidx",
+  "name": "uuid-basex",
   "version": "0.0.0-development",
   "description": "Base-xx UUID generator",
   "types": "dist/index.d.ts",
