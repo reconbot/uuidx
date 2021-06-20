@@ -1,7 +1,7 @@
 {
-  "name": "@reconbot/typescript-library-template",
+  "name": "uuidx",
   "version": "0.0.0-development",
-  "description": "Rollup your code and types for publishing",
+  "description": "Base-xx UUID generator",
   "types": "dist/index.d.ts",
   "exports": {
     "require": "./dist/index.js",
@@ -10,8 +10,8 @@
   "engines": {
     "node": "^12.22 || ^14.13 || >=16"
   },
-  "repository": "git@github.com:reconbot/typescript-library-template.git",
-  "homepage": "https://github.com/reconbot/typescript-library-template",
+  "repository": "git@github.com:reconbot/uuidx.git",
+  "homepage": "https://github.com/reconbot/uuidx",
   "scripts": {
     "test": "mocha",
     "lint": "tsc && eslint lib/*.ts",
@@ -22,10 +22,23 @@
     "semantic-release": "semantic-release"
   },
   "keywords": [
-    "typescript-library-template"
+    "uuidx",
+    "uuid",
+    "uid",
+    "base62",
+    "unique",
+    "id",
+    "identifier",
+    "url-friendly",
+    "generator",
+    "base64"
   ],
+  "author": "Francis Gulotta <wizard@roborooter.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "base-x": "^3.0.8",
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.16.1",
     "@types/chai": "^4.2.19",
