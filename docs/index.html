@@ -85,11 +85,11 @@
 <span style="color: #008000">// -&gt; G8vYZyitbW9tM_dIpBPZN</span>
 
 <span style="color: #008000">// decode a urlsafe (base64) uuid</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">decodedUUID</span><span style="color: #000000"> = </span><span style="color: #001080">uuidx</span><span style="color: #000000">.</span><span style="color: #795E26">toUUID</span><span style="color: #000000">(</span><span style="color: #001080">encodedUUID</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">decodedUUID</span><span style="color: #000000"> = </span><span style="color: #001080">uuidx</span><span style="color: #000000">.</span><span style="color: #795E26">toUUID</span><span style="color: #000000">(</span><span style="color: #001080">encodedUUID</span><span style="color: #000000">)</span>
 <span style="color: #008000">// -&gt; 2a21ff3d-8927-4be8-9770-fcdb19973f71</span>
 
 <span style="color: #008000">// urlsafe encode an existing traditional uuid</span>
-<span style="color: #001080">uuidx</span><span style="color: #000000">.</span><span style="color: #795E26">fromUUID</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2a21ff3d-8927-4be8-9770-fcdb19973f71&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">uuidx</span><span style="color: #000000">.</span><span style="color: #795E26">fromUUID</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2a21ff3d-8927-4be8-9770-fcdb19973f71&#039;</span><span style="color: #000000">)</span>
 <span style="color: #008000">// -&gt; G8vYZyitbW9tM_dIpBPZN</span>
 
 <span style="color: #008000">// Custom dictionaries</span>
@@ -108,7 +108,7 @@
 				</a>
 				<p><a href="https://reconbot.github.io/uuid-basex/classes/uuidbasex.html">Checkout our docs!</a></p>
 				<a href="#how-does-it-work" id="how-does-it-work" style="color: inherit; text-decoration: none;">
-					<h3>How does it work?</h3>
+					<h2>How does it work?</h2>
 				</a>
 				<p>We use <a href="https://github.com/cryptocoinjs/base-x"><code>base-x</code></a> for the conversions under the hood. And for the <code>v4()</code> method we use <a href="https://github.com/uuidjs/uuid#readme"><code>uuid</code></a> the defacto standard for making uuids. If you want other uuid versions make them with <code>uuid</code> and pass them to the <code>fromUUID()</code> method because it will be a lot easier to reason about doing that, then trying to understand if you&#39;re passing a converted uuid into the arguments or not.</p>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">

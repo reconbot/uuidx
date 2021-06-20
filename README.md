@@ -17,6 +17,7 @@ npm i uuid-basex
 ```
 
 ## Usage
+
 ```ts
 import { UUIDBaseX } from 'uuid-basex'
 
@@ -25,11 +26,11 @@ const encodedUUID = uuid.v4()
 // -> G8vYZyitbW9tM_dIpBPZN
 
 // decode a urlsafe (base64) uuid
-const decodedUUID = uuidx.toUUID(encodedUUID);
+const decodedUUID = uuidx.toUUID(encodedUUID)
 // -> 2a21ff3d-8927-4be8-9770-fcdb19973f71
 
 // urlsafe encode an existing traditional uuid
-uuidx.fromUUID('2a21ff3d-8927-4be8-9770-fcdb19973f71');
+uuidx.fromUUID('2a21ff3d-8927-4be8-9770-fcdb19973f71')
 // -> G8vYZyitbW9tM_dIpBPZN
 
 // Custom dictionaries
