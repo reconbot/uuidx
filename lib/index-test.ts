@@ -13,7 +13,7 @@ describe('UUIDX', () => {
       const uuid = '2a21ff3d-8927-4be8-9770-fcdb19973f71'
 
       const id = uuidx.fromUUID(uuid)
-      expect(id).to.equal('cmCIjF-AaZbA_WOi6NYjK')
+      expect(id).to.equal('G8vYZyitbW9tM_dIpBPZN')
 
       const output = uuidx.toUUID(id)
       expect(output).to.equal(uuid)
@@ -61,11 +61,11 @@ describe('UUIDX', () => {
     })
     it('works when I mess around', () => {
       const fixtures = [
-        ['MMMMMMMMMMMMMMMM', '00000000-0000-0000-0000-000000000000'],
-        ['St2rWWDbyBprYjpAQ02x4', '06ad547f-fe02-477b-9473-f7977e4d5e17'],
-        ['d1e0hD7QelwcV2J4zCSMg-', '941532a0-6be1-443a-a9d5-d57bdf180a52'],
-        ['dZEtG_8jjbrmBDFHH7S1Hw', 'ba86b8f0-6fdf-4944-87a0-8a491a19490e'],
-        ['uWWWWWWWWWWWWWWWWWWWWW', 'ffffffff-ffff-ffff-ffff-ffffffffffff'],
+        ['0000000000000000', '00000000-0000-0000-0000-000000000000'],
+        ['6Hlh__w97uVhPZVt-jlUn', '06ad547f-fe02-477b-9473-f7977e4d5e17'],
+        ['2k5jawq-54eGDlRnLv60Fi', '941532a0-6be1-443a-a9d5-d57bdf180a52'],
+        ['2WxHzMrZZ9h8uwyAAq6kAe', 'ba86b8f0-6fdf-4944-87a0-8a491a19490e'],
+        ['3_____________________', 'ffffffff-ffff-ffff-ffff-ffffffffffff'],
       ]
       const uuidx = UUIDX.urlSafe()
       for (const [encodedUUID, uuid] of fixtures) {

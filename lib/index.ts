@@ -2,11 +2,7 @@ import {v4 as uuidv4, V4Options } from 'uuid'
 import baseX, { BaseConverter } from 'base-x'
 
 const base62 = baseX('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-
-// borrowed from nanoid https://github.com/ai/nanoid/blob/307a1e0b651b8931e3f212a6f1be96baea62fe1e/url-alphabet/index.js
-const baseURLSafe = baseX('ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW')
-
-const UUID_LENGTH = 128 / 8 * 2 // hex encoding is 2 characters for every byte
+const base64 = baseX('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_')
 
 export class UUIDX {
   public base: baseX.BaseConverter
@@ -15,8 +11,12 @@ export class UUIDX {
     return new UUIDX(base62)
   }
 
+  static base64(): UUIDX {
+    return new UUIDX(base64)
+  }
+
   static urlSafe(): UUIDX {
-    return new UUIDX(baseURLSafe)
+    return UUIDX.base64()
   }
 
   constructor(alphabet: string | BaseConverter) {
@@ -49,7 +49,7 @@ export class UUIDX {
     try {
       return this.base.decode(input)
     } catch (error) {
-      if (error instanceof Error && error.message?.slice(0, 8) === 'Non-base') {
+      if (error instanceof Error && error.message.startsWith('Non-base')) {
         throw new Error('Invalid encoded UUID')
       }
       throw error
