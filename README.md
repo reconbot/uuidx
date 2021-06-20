@@ -48,7 +48,7 @@ const decodedAAA = uuidAAAAAAAAA.toUUID(aAAaaUUID)
 
 [Checkout our docs!](https://reconbot.github.io/uuid-basex/classes/uuidbasex.html)
 
-### How does it work?
+## How does it work?
 
 We use [`base-x`](https://github.com/cryptocoinjs/base-x) for the conversions under the hood. And for the `v4()` method we use [`uuid`](https://github.com/uuidjs/uuid#readme) the defacto standard for making uuids. If you want other uuid versions make them with `uuid` and pass them to the `fromUUID()` method because it will be a lot easier to reason about doing that, then trying to understand if you're passing a converted uuid into the arguments or not.
 
