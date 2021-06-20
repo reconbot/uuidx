@@ -1,87 +1,58 @@
-import {v1 as uuidv1, v4 as uuidv4, v5 as uuidv5 } from 'uuid'
-import baseX from 'base-x'
+import {v4 as uuidv4, V4Options } from 'uuid'
+import baseX, { BaseConverter } from 'base-x'
+
 const base62 = baseX('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-const OUTPUT_LENGTH = 22
-const UUID_LENGTH = 32
 
-class UUID62 {
-  constructor() {
-    this.base = base62
-    // expose underlying methods for convenience (matches uuid-base62)
-    this.baseX = baseX
-    // pre-defined v5/v3 namespaces
-    this.URL = '3h8Pgc0Wb7WH6HsyG77m40'
-    this.DNS = '3h8PgalTIPNcNhUD4ZbIKY'
+// borrowed from nanoid https://github.com/ai/nanoid/blob/307a1e0b651b8931e3f212a6f1be96baea62fe1e/url-alphabet/index.js
+const baseURLSafe = baseX('ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW')
+
+const UUID_LENGTH = 128 / 8 * 2 // hex encoding is 2 characters for every byte
+
+export class UUIDX {
+  public base: baseX.BaseConverter
+
+  static base62(): UUIDX {
+    return new UUIDX(base62)
   }
 
-  get customBase() {
-    return this.base
+  static urlSafe(): UUIDX {
+    return new UUIDX(baseURLSafe)
   }
 
-  set customBase(base) {
-    this.base = base
+  constructor(alphabet: string | BaseConverter) {
+    this.base = typeof alphabet === 'string' ? baseX(alphabet) : alphabet
   }
 
-  get length() {
-    return OUTPUT_LENGTH
+  v4(options?: V4Options): string {
+    const uuid = uuidv4(options, Buffer.alloc(16))
+    return this.base.encode(uuid)
   }
 
-  get uuidLength() {
-    return UUID_LENGTH
-  }
-
-  v4() {
-    const args = Array.prototype.slice.call(arguments)
-    if (!args[1]) {
-      // make sure we use a buffer to avoid getting a uuid with dashes
-      args[1] = new Buffer(16)
+  toUUID(input: string): string {
+    const res = this.decode(input)
+    if (res.length !== 16) {
+      throw new Error('Invalid encoded UUID')
     }
-    const id = uuidv4.apply(this, args)
-    return this.encode(id)
+    const hex = res.toString('hex')
+    return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`
   }
 
-  v5() {
-    const args = Array.prototype.slice.call(arguments)
-    if (typeof args[1] === 'string' && /^[0-9A-Za-z]{22}$/.test(args[1])) {
-      args[1] = this.decode(args[1])
+  fromUUID(input: string): string {
+    const data = Buffer.from(input.replace(/-/g, ''), 'hex')
+    if (data.length !== 16) {
+      throw new Error('Invalid UUID')
     }
-    const id = uuidv5.apply(this, args)
-    return this.encode(id)
+    return this.base.encode(data)
   }
 
-  v1() {
-    const args = Array.prototype.slice.call(arguments)
-    if (!args[1]) {
-      // make sure we use a buffer to avoid getting a uuid with dashes
-      args[1] = new Buffer(16)
+  private decode(input: string): Buffer {
+    try {
+      return this.base.decode(input)
+    } catch (error) {
+      if (error instanceof Error && error.message?.slice(0, 8) === 'Non-base') {
+        throw new Error('Invalid encoded UUID')
+      }
+      throw error
     }
-    const id = uuidv1.apply(this, args)
-    return this.encode(id)
-  }
-
-  encode(input, encoding) {
-    encoding = encoding || 'hex'
-    if (typeof input === 'string') {
-      // remove the dashes to save some space
-      input = new Buffer(input.replace(/-/g, ''), encoding)
-    }
-    return ensureLength(this.base.encode(input), OUTPUT_LENGTH)
-  }
-
-  decode(input, encoding) {
-    encoding = encoding || 'hex'
-    const res = ensureLength(
-      new Buffer(this.base.decode(input)).toString(encoding),
-      UUID_LENGTH
-    )
-    // insert dashes on return
-    return `${res.slice(0, 8)}-${res.slice(8, 12)}-${res.slice(12, 16)}-${res.slice(16, 20)}-${res.slice(20)}`
   }
 }
-
-function ensureLength(input, targetLength) {
-  input = input.toString()
-  return `${'0'.repeat(32)}${input}`.slice(-targetLength)
-}
-
-export default new UUID62()
