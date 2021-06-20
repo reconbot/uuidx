@@ -46,7 +46,7 @@ const decodedAAA = uuidAAAAAAAAA.toUUID(aAAaaUUID)
 
 ## API
 
-[Checkout our docs!](/docs/classes/uuidbasex.html)
+[Checkout our docs!](https://reconbot.github.io/uuid-basex/classes/uuidbasex.html)
 
 ### How does it work?
 

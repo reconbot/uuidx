@@ -15,7 +15,7 @@
   "scripts": {
     "test": "mocha",
     "lint": "tsc && eslint lib/*.ts",
-    "docs": "typedoc --out docs lib/index.ts",
+    "docs": "typedoc --out docs --excludePrivate lib/index.ts",
     "format": "eslint lib/*.ts --fix",
     "clean": "rm -rf dist-ts dist",
     "build": "npm run clean && tsc -p tsconfig-build.json && rollup -c && ts-eager bundle-types",

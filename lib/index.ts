@@ -8,6 +8,9 @@ const base64 = baseX('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
  * Base-XX UUID Encoder / Decoder
  */
 export class UUIDBaseX {
+  /**
+   * I don't need to hide this from you but like just use [`base-x`](https://github.com/cryptocoinjs/base-x) directly?
+   */
   public base: baseX.BaseConverter
 
   /**
@@ -34,7 +37,7 @@ export class UUIDBaseX {
   /**
    * Creates a UUIDBaseX object
    *
-   * @param alphabet takes a string that includes the unique characters you want to use in your encoding. Or a [BaseConverter object from base-X](https://github.com/cryptocoinjs/base-x)
+   * @param alphabet - takes a string that includes the unique characters you want to use in your encoding. Or a [BaseConverter object from base-X](https://github.com/cryptocoinjs/base-x)
    */
   constructor(alphabet: string | BaseConverter) {
     this.base = typeof alphabet === 'string' ? baseX(alphabet) : alphabet
@@ -42,7 +45,7 @@ export class UUIDBaseX {
 
   /**
    * Create a version 4 (random) UUID in your alphabet
-   * @param options The options from [`uuid`'s v4 method](https://github.com/uuidjs/uuid#uuidv4options-buffer-offset)
+   * @param options - The options from [`uuid`'s v4 method](https://github.com/uuidjs/uuid#uuidv4options-buffer-offset)
    */
   v4(options?: V4Options): string {
     const uuid = uuidv4(options, Buffer.alloc(16))
@@ -53,7 +56,7 @@ export class UUIDBaseX {
    * Takes an encoded UUID and returns a UUID as regular people know them
    *
    * Throws if it's not a valid encoded uuid
-   * @param input an encodedUUID
+   * @param input - an encodedUUID
    */
   toUUID(input: string): string {
     const res = this.decode(input)
@@ -68,7 +71,7 @@ export class UUIDBaseX {
    * Takes an UUID and returns an encoded UUID as with the alphabet you've provided
    *
    * Throws if it's not a valid encoded uuid
-   * @param input a regular ole UUID
+   * @param input - a regular ole UUID
    */
   fromUUID(input: string): string {
     const data = Buffer.from(input.replace(/-/g, ''), 'hex')
