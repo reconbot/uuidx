@@ -5,7 +5,8 @@
   "types": "dist/index.d.ts",
   "exports": {
     "require": "./dist/index.js",
-    "default": "./dist/index-esm.mjs"
+    "default": "./dist/index-esm.mjs",
+    "types": "./dist/index.d.ts"
   },
   "engines": {
     "node": "^12.22 || ^14.13 || >=16"
